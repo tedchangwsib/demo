@@ -1,8 +1,9 @@
 apply plugin: 'java'
 apply plugin: 'war'
-apply plugin: 'eclipse-wtp'
+
 //apply plugin: 'jetty' //too old, Jetty6, use gretty
 apply plugin: 'org.akhikhl.gretty'
+apply plugin: 'com.bmuschko.cargo'
 
 // JDK 7
 sourceCompatibility = 1.7
@@ -32,6 +33,7 @@ buildscript {
 
   dependencies {
     classpath 'org.akhikhl.gretty:gretty:+'
+    classpath 'com.bmuschko:gradle-cargo-plugin:2.2.1'
   }
 }
 
@@ -41,18 +43,29 @@ gretty {
   servletContainer = 'jetty9'
 }
 
+cargo {
+  containerId = 'tomcat7x'
+  port = 8082
 
-//For Eclipse IDE only
-eclipse {
+  deployable {
+    context = 'demo'
+  }
 
-  wtp {
-    component {
-      
-      //define context path, default to project folder name
-      contextPath = 'spring4'
-      
+  remote {
+    hostname = 'localhost'
+    username = 'tomcat2'
+    password = 'tomcat'
+  }
+
+  local {
+    homeDir = file('C:\\Tomcat 7.0\\')
+    outputFile = file('build\\output.log')
+    timeout = 60000
+
+    containerProperties {
+      property 'cargo.tomcat.ajp.port', 8099
     }
-    
   }
 }
+
 
