@@ -14,7 +14,7 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="#">Project Name</a>
+			<a class="navbar-brand" href="#">Changing the project name</a>
 		</div>
 	</div>
 </nav>
@@ -28,7 +28,7 @@
 			</c:if>
 
 			<c:if test="${empty msg}">
-				Welcome Welcome!
+				Waedasdfasdfasdf
 			</c:if>
 		</p>
 		<p>
